@@ -1,10 +1,7 @@
 import socket
-from picarx import Picarx
 
 HOST = "192.168.1.65" # IP address of your Raspberry PI
 PORT = 65432          # Port to listen on (non-privileged ports are > 1023)
-
-px = Picarx()
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
@@ -21,9 +18,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 print(data)     
                 client.sendall(data) # Echo back to client
 
-                if data.lower() == "up":
-                    px.set_dir_servo_angle(0)
-                    px.forward(80)
     except: 
         print("Closing socket")
         client.close()
