@@ -20,7 +20,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             if data != b"":
                 print(data)     
 
-                if "up" == data.lower():
+                text = data.decode().strip().lower()
+                print(f"Decoded data: {text}")
+
+                if text == "up":
                     print("up pressed!")
                     px.forward(80)
 
