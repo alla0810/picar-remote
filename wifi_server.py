@@ -38,14 +38,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         tilt_angle = -60
                 elif text == "left":
                     print("pan left pressed!")
+                    pan_angle -= 5
+                    if pan_angle < -60:
+                        pan_angle = -60
+                elif text == "right":
+                    print("pan right pressed!")
                     pan_angle += 5
                     if pan_angle > 60:
                         pan_angle = 60
-                elif text == "right":
-                    print("pan right pressed!")
-                    pan_angle -= 5
-                    if pan_angle > -60:
-                        pan_angle = -60
 
                         
                 px.set_cam_tilt_angle(tilt_angle)
