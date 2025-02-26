@@ -21,6 +21,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 print(data)     
 
                 if "up" == data.lower():
+                    print("up pressed!")
                     px.forward(80)
 
                 client.sendall(data) # Echo back to client                    
