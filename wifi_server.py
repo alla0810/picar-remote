@@ -20,7 +20,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             if data != b"":
                 print(data)     
 
-                if data.lower() == "up":
+                if "up" == data.lower():
                     px.forward(80)
 
                 client.sendall(data) # Echo back to client                    
