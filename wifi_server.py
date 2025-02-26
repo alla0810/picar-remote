@@ -19,10 +19,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
             if data != b"":
                 print(data)     
-                client.sendall(data) # Echo back to client
 
                 if data.lower() == "up":
                     px.forward(80)
+
+                client.sendall(data) # Echo back to client                    
 
     except: 
         print("Closing socket")
