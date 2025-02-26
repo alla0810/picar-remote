@@ -1,10 +1,10 @@
 var server_port = 65432;
 var server_addr = "192.168.1.65";   // the IP address of your Raspberry PI
 
-function client(){
+function client(input){
     
     const net = require('net');
-    var input = document.getElementById("myName").value;
+//    var input = document.getElementById("myName").value;
 
     const client = net.createConnection({ port: server_port, host: server_addr }, () => {
         // 'connect' listener.
@@ -28,7 +28,7 @@ function client(){
 
 }
 
-function greeting(){
+function update_data(){
 
     // get the element from html
     var name = document.getElementById("myName").value;
@@ -36,6 +36,56 @@ function greeting(){
     document.getElementById("greet").innerHTML = "Hello " + name + " !";
     // send the data to the server 
 //    to_server(name);
-    client();
+    client(name);
 
 }
+
+function upArrow(){
+
+    // get the element from html
+    var name = document.getElementById("myName").value;
+    // update the content in html
+    document.getElementById("greet").innerHTML = "Hello " + name + " !";
+    // send the data to the server 
+//    to_server(name);
+    client("up");
+
+}
+
+function leftArrow(){
+
+    // get the element from html
+    var name = document.getElementById("myName").value;
+    // update the content in html
+    document.getElementById("greet").innerHTML = "Hello " + name + " !";
+    // send the data to the server 
+//    to_server(name);
+    client("left");
+
+}
+
+function rightArrow(){
+
+    // get the element from html
+    var name = document.getElementById("myName").value;
+    // update the content in html
+    document.getElementById("greet").innerHTML = "Hello " + name + " !";
+    // send the data to the server 
+//    to_server(name);
+    client("right");
+
+}
+
+function downArrow(){
+
+    // get the element from html
+    var name = document.getElementById("myName").value;
+    // update the content in html
+    document.getElementById("greet").innerHTML = "Hello " + name + " !";
+    // send the data to the server 
+//    to_server(name);
+    client("down");
+
+}
+
+
