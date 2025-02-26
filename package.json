@@ -1,0 +1,24 @@
+{
+  "name": "tutorial",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^10.4.7"
+  },
+  "description": "npm init -y\r npm install electron\r npm start\r npm clean\r npm start",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alla0810/picar-remote.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alla0810/picar-remote/issues"
+  },
+  "homepage": "https://github.com/alla0810/picar-remote#readme"
+}
