@@ -1,24 +1,46 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
+const express = require("express")
+
+let mainWindow;
+const express_server = express();
+const PORT = 3000;
+const PC_IP = "192.168.1.77";
+
+console.log(`Express Server running at http://${PC_IP}:${PORT}`);
+
+express_server.use(express.static(__dirname));
+
+express_server.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+
+express_server.listen(PORT, () => {
+  console.log(`Server runnig at http://${PC_IP}:${PORT}`);
+});
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1000,
-    height: 1000,
+    width: 1500,
+    height: 1500,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation:false,
+      sandbox: false,
+      enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js')
     }
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
-
+//  mainWindow.loadFile('index.html')
+  mainWindow.loadURL(`http://${PC_IP}:${PORT}`);    // load from server address
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+
 }
 
 // This method will be called when Electron has finished

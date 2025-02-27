@@ -26,22 +26,22 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 text = data.decode().strip().lower()
                 print(f"Decoded data: {text}")
 
-                if text == "up":
+                if text == "headup":
                     print("tilt up pressed!")
                     tilt_angle += 5
                     if tilt_angle > 60:
                         tilt_angle = 60
-                elif text == "down":
+                elif text == "headdown":
                     print("tilt down pressed!")
                     tilt_angle -=5
                     if tilt_angle <-60:
                         tilt_angle = -60
-                elif text == "left":
+                elif text == "headleft":
                     print("pan left pressed!")
                     pan_angle -= 5
                     if pan_angle < -60:
                         pan_angle = -60
-                elif text == "right":
+                elif text == "headright":
                     print("pan right pressed!")
                     pan_angle += 5
                     if pan_angle > 60:

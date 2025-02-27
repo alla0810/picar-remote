@@ -4,6 +4,7 @@ var server_addr = "192.168.1.86";   // the IP address of your Raspberry PI
 function client(input){
     
     const net = require('net');
+//    const net = import('net');    
 //    var input = document.getElementById("myName").value;
 
     const client = net.createConnection({ port: server_port, host: server_addr }, () => {
@@ -40,7 +41,7 @@ function update_data(){
 
 }
 
-function upArrow(){
+function HeadupArrow(){
 
     // get the element from html
     var name = document.getElementById("myName").value;
@@ -48,11 +49,11 @@ function upArrow(){
     document.getElementById("greet").innerHTML = "Hello " + name + " !";
     // send the data to the server 
 //    to_server(name);
-    client("up");
+    client("HeadUp");
 
 }
 
-function leftArrow(){
+function HeadleftArrow(){
 
     // get the element from html
     var name = document.getElementById("myName").value;
@@ -60,11 +61,11 @@ function leftArrow(){
     document.getElementById("greet").innerHTML = "Hello " + name + " !";
     // send the data to the server 
 //    to_server(name);
-    client("left");
+    client("HeadLeft");
 
 }
 
-function rightArrow(){
+function HeadrightArrow(){
 
     // get the element from html
     var name = document.getElementById("myName").value;
@@ -72,11 +73,11 @@ function rightArrow(){
     document.getElementById("greet").innerHTML = "Hello " + name + " !";
     // send the data to the server 
 //    to_server(name);
-    client("right");
+    client("HeadRight");
 
 }
 
-function downArrow(){
+function HeaddownArrow(){
 
     // get the element from html
     var name = document.getElementById("myName").value;
@@ -84,8 +85,69 @@ function downArrow(){
     document.getElementById("greet").innerHTML = "Hello " + name + " !";
     // send the data to the server 
 //    to_server(name);
-    client("down");
+    client("HeadDown");
 
 }
 
+function wifi_bt_toggleSwitch(){
+    let toggle = document.getElementById("wifi_bt_toggle");
+    let label = document.getElementById("toggleLabel");
 
+    if(toggle.checked){        
+        label.textContent = "Bluetooth";
+        console.log("Bluetooth")
+    }
+    else {
+        label.textContent = "WiFi";
+        console.log("WiFi")        
+    }
+}
+
+
+function DriveupArrow(){
+
+    // get the element from html
+    var name = document.getElementById("myName").value;
+    // update the content in html
+    document.getElementById("greet").innerHTML = "Hello " + name + " !";
+    // send the data to the server 
+//    to_server(name);
+    client("DriveUp");
+
+}
+
+function DriveleftArrow(){
+
+    // get the element from html
+    var name = document.getElementById("myName").value;
+    // update the content in html
+    document.getElementById("greet").innerHTML = "Hello " + name + " !";
+    // send the data to the server 
+//    to_server(name);
+    client("DriveLeft");
+
+}
+
+function DriverightArrow(){
+
+    // get the element from html
+    var name = document.getElementById("myName").value;
+    // update the content in html
+    document.getElementById("greet").innerHTML = "Hello " + name + " !";
+    // send the data to the server 
+//    to_server(name);
+    client("DriveRight");
+
+}
+
+function DrivedownArrow(){
+
+    // get the element from html
+    var name = document.getElementById("myName").value;
+    // update the content in html
+    document.getElementById("greet").innerHTML = "Hello " + name + " !";
+    // send the data to the server 
+//    to_server(name);
+    client("DriveDown");
+
+}

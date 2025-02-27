@@ -9,47 +9,83 @@
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <script src="./index.js"></script>
     
   </head>
 
 <body>
 
+  <div class="container">  
+    <div class="text-left col-md-12">
+      <h1 class="m-0 fs-4">PiCar-X Remote </h1>
+
+      <div class="text-right col-md-12">
+        <span class="toggle-label" id="toggleLabel">WiFi</span>        
+        <label class="custom-switch">
+          <input type="checkbox" id="wifi_bt_toggle" onchange="wifi_bt_toggleSwitch()">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
     <div class="container">
-  
-        <div class="jumbotron">
-        <h1>PiCar-X Remote</h1>
-        <h2>CS498: IoT -- Lab 2</h2>
+      <div class="jumbotron text-center col-md-12">
   
         <!-- <video class="center" width="600" height="400" controls>
           <source src="samplevid.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video> -->
-        <img src="http://192.168.1.86:9000/mjpg" width="500" height="300" id='pics'>
-      </div>   
+        <img src="http://192.168.1.86:9000/mjpg" width="800" height="500" id='pics'>
+      </div>     
+
+
     </div> 
 
 <div class="row">      
     <div class="Container">    
-        <div class="jumbotron text-center col-md-6">
+      <div class="jumbotron text-center col-md-4">
+
+        <h3>Head Direction</h3>
+
+        <br>                
+          <span>&nbsp;&nbsp;</span>         
+          <button id="HeadupArrow" class="btn btn-primary" style='font-size:50px; color:grey;' onclick="HeadupArrow()">&#8679;</button>
+          <br>        
+          <span id="HeadleftArrow" class="btn btn-primary" style='font-size:45px; color:grey;' onclick="HeadleftArrow()">&#8678;</span>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+          <span id="HeadrightArrow" class="btn btn-primary" style='font-size:45px; color:grey;' onclick="HeadrightArrow()">&#8680;</span>
+          <br>
+          <span>&nbsp;&nbsp;</span> 
+          <span id="HeaddownArrow" class="btn btn-primary" style='font-size:50px; color:grey;' onclick="HeaddownArrow()">&#8681;</span>
+          <br>
+      </div>
+
+      <div class="jumbotron text-center col-md-4">
+        <h3>Drive Direction</h3>
+
+        <br>      
 
         <span>&nbsp;&nbsp;</span>         
-        <button id="upArrow" class="btn btn-primary" style='font-size:50px; color:grey;' onclick="upArrow()">&#8679;</button>
+        <button id="DriveupArrow" class="btn btn-warning" style='font-size:50px; color:grey;' onclick="DriveupArrow()">&#8679;</button>
         <br>        
-        <span id="leftArrow" class="btn btn-primary" style='font-size:45px; color:grey;' onclick="leftArrow()">&#8678;</span>
+        <span id="DriveleftArrow" class="btn btn-warning" style='font-size:45px; color:grey;' onclick="DriveleftArrow()">&#8678;</span>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-        <span id="rightArrow" class="btn btn-primary" style='font-size:45px; color:grey;' onclick="rightArrow()">&#8680;</span>
+        <span id="DriverightArrow" class="btn btn-warning" style='font-size:45px; color:grey;' onclick="DriverightArrow()">&#8680;</span>
         <br>
         <span>&nbsp;&nbsp;</span> 
-        <span id="downArrow" class="btn btn-primary" style='font-size:50px; color:grey;' onclick="downArrow()">&#8681;</span>
+        <span id="DrivedownArrow" class="btn btn-warning" style='font-size:50px; color:grey;' onclick="DrivedownArrow()">&#8681;</span>
         <br>
+      </div>
 
-        My name is: <input id="myName" type="text" placeholder="name"/>
-
-        <button class="btn btn-success" onclick="update_data()">Sumbit</button>
+      <div class="jumbotron text-left col-md-4">    
+        <br>        
+        <br>      
+        <br>      
 
         <p>
-            <span id="direction_dot" style="color:Green">&bull;</span> Car Direction: <span id="direction"> </span>
+           <span id="direction_dot" style="color:Green">&bull;</span> Car Direction: <span id="direction"> </span>
            <br>
            <span id="speed_dot" style="color:green">&bull;</span> Speed: <span id="speed">0.0</span>  
            <br>
@@ -59,19 +95,25 @@
            <br>
            <span id="steering_dot" style="color:green">&bull;</span> Steering Angle: <span id="steering">0.0</span>
            <br>
-          </p>  
+        </p>  
 
         <br>
         <span id="greet"> </span>
         <br>
         <span id="greet_from_server"> </span>
-    
+      </div>            
 
-        </div>    
     </div>
-    <div class="Container">    
-        <p>KyoSook Shin(kyosook2), Mohammad Tamim(tamim2), Jacob Fuehne(jfuehne2), Jeffery Fan(jfan16)</p>
-    </div>
+</div>    
+
+
+<div class="row">      
+  <div class="Container">    
+    <div class="text-center col-md-12">  
+      <h3>CS498: IoT -- Lab 2</h3>     
+      <p>KyoSook Shin(kyosook2), Mohammad Tamim(tamim2), Jacob Fuehne(jfuehne2), Jeffery Fan(jfan16)</p>
+    </div>  
+  </div>
 </div>
 </body>
 </html>

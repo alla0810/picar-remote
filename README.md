@@ -1,10 +1,9 @@
 # picar-remote
 
 ## Frontend
-npm init -y  
+npm install express
 npm install electron  
-npm start  
-npm clean  
+npm init -y  
 npm start  
 
 ## Backend
