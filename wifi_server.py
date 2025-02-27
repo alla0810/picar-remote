@@ -2,7 +2,7 @@ import socket
 from time import sleep
 from picarx import Picarx
 
-HOST = "192.168.1.65" # IP address of your Raspberry PI
+HOST = "192.168.1.86" # IP address of your Raspberry PI
 PORT = 65432          # Port to listen on (non-privileged ports are > 1023)
 
 px = Picarx()
