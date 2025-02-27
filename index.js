@@ -42,49 +42,27 @@ function update_data(){
 }
 
 function HeadupArrow(){
+    console.log("HeadUp");
 
-    // get the element from html
-    var name = document.getElementById("myName").value;
-    // update the content in html
-    document.getElementById("greet").innerHTML = "Hello " + name + " !";
-    // send the data to the server 
-//    to_server(name);
     client("HeadUp");
 
 }
 
 function HeadleftArrow(){
+    console.log("HeadLeft");
 
-    // get the element from html
-    var name = document.getElementById("myName").value;
-    // update the content in html
-    document.getElementById("greet").innerHTML = "Hello " + name + " !";
-    // send the data to the server 
-//    to_server(name);
     client("HeadLeft");
-
 }
 
 function HeadrightArrow(){
-
-    // get the element from html
-    var name = document.getElementById("myName").value;
-    // update the content in html
-    document.getElementById("greet").innerHTML = "Hello " + name + " !";
-    // send the data to the server 
-//    to_server(name);
+    console.log("HeadRight");
+    
     client("HeadRight");
-
 }
 
 function HeaddownArrow(){
+    console.log("HeadDown");
 
-    // get the element from html
-    var name = document.getElementById("myName").value;
-    // update the content in html
-    document.getElementById("greet").innerHTML = "Hello " + name + " !";
-    // send the data to the server 
-//    to_server(name);
     client("HeadDown");
 
 }
@@ -105,49 +83,29 @@ function wifi_bt_toggleSwitch(){
 
 
 function DriveupArrow(){
+    console.log("DriveUp");
 
-    // get the element from html
-    var name = document.getElementById("myName").value;
-    // update the content in html
-    document.getElementById("greet").innerHTML = "Hello " + name + " !";
-    // send the data to the server 
-//    to_server(name);
     client("DriveUp");
 
 }
 
 function DriveleftArrow(){
+    console.log("DriveLeft");
 
-    // get the element from html
-    var name = document.getElementById("myName").value;
-    // update the content in html
-    document.getElementById("greet").innerHTML = "Hello " + name + " !";
-    // send the data to the server 
-//    to_server(name);
     client("DriveLeft");
 
 }
 
 function DriverightArrow(){
+    console.log("DriveRight");
 
-    // get the element from html
-    var name = document.getElementById("myName").value;
-    // update the content in html
-    document.getElementById("greet").innerHTML = "Hello " + name + " !";
-    // send the data to the server 
-//    to_server(name);
     client("DriveRight");
 
 }
 
 function DrivedownArrow(){
+    console.log("DriveDown");
 
-    // get the element from html
-    var name = document.getElementById("myName").value;
-    // update the content in html
-    document.getElementById("greet").innerHTML = "Hello " + name + " !";
-    // send the data to the server 
-//    to_server(name);
     client("DriveDown");
 
 }

@@ -47,6 +47,25 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     if pan_angle > 60:
                         pan_angle = 60
 
+                if text == "driveup":
+                    print("drive up pressed!")
+                    px.set_dir_servo_angle(0)
+                    px.forward(80)
+
+                elif text == "drivedown":
+                    print("drive down pressed!")
+                    px.set_dir_servo_angle(0)
+                    px.backward(80)
+
+                elif text == "driveleft":
+                    print("drive left pressed!")
+                    px.set_dir_servo_angle(-30)
+                    px.forward(80)
+
+                elif text == "driveright":
+                    print("drive right pressed!")
+                    px.set_dir_servo_angle(30)
+                    px.forward(80)
                         
                 px.set_cam_tilt_angle(tilt_angle)
                 px.set_cam_pan_angle(pan_angle)
