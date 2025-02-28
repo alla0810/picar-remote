@@ -11,6 +11,9 @@ server_port = 1
 
 px = Picarx()
 
+pan_angle = 0
+tilt_angle = 0
+
 buf_size = 1024
 
 client_sock = None
