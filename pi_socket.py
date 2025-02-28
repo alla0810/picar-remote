@@ -27,7 +27,7 @@ def handler(signum, frame):
 
 
 def process_message(message):
-    data = json.load(message)
+    data = json.loads(message)
     content = data["content"]
 
     if content == "headup":
