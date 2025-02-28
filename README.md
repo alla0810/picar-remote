@@ -1,8 +1,8 @@
 # picar-remote
 
 ## Frontend
-pip install flask
-python bt_flask_server.py
+pip install portalocker
+python bt_win_socket.py
 
 npm install express
 npm install electron  

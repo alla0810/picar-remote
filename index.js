@@ -1,3 +1,9 @@
+const fs = require('fs');
+const lockfile = require('proper-lockfile');
+
+const MESSAGE_FILE = "message.json";
+const RESPONSE_FILE = "response.json";
+
 var server_port = 65432;
 var server_addr = "192.168.1.86";   // the IP address of your Raspberry PI
 
@@ -178,22 +184,35 @@ function DrivedownArrow(){
 
 }
 
-function sendCommand(command) {
-    fetch("/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ "message": command })
-    })
-    .then(response => response.json())
-    .then(data => console.log("Response:", data))
-    .catch(error => console.error("Error:", error));
+
+
+function sendCommand(message) {
+    if (!fs.existsSync(MESSAGE_FILE)) {
+        fs.writeFileSync(MESSAGE_FILE, "");
+    }
+
+    lockfile.lock(MESSAGE_FILE).then((release) => {
+        const data = {sender: "JavaScript", content: message};
+        fs.writeFileSync(MESSAGE_FILE, JSON.stringify(data));
+        console.log("JavaScripte created message.json file");
+        release();
+    }).catch((err) => console.error("Fail to lockfile", err));
+
 }
 
 function fetchMessages() {
-    fetch("/receive")
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("messages").innerText = data.received;
-    })
-    .catch(error => console.error("Error:", error));
+    if (fs.existsSync(RESPONSE_FILE) && fs.statSync(RESPONSE_FILE).size > 0) {
+        try {
+            const response = JSON.parse(fs.readFileSync(RESPONSE_FILE, "utf8"));
+            console.log(`JavaScript received response from Python: ${response.reply}`);
+            fs.unlinkSync(RESPONSE_FILE);
+        } catch (error) {
+            console.error("JSON Parsing Error:", error);
+        }
+
+    }
 }
+
+sendCommand("Hello from JavaScript!");
+
+setInterval(fetchMessages, 1000);

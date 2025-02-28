@@ -3,6 +3,7 @@ import threading
 from collections import deque
 import signal
 import time
+import json
 
 server_addr = 'D8:3A:DD:6D:E5:D4'
 server_port = 1
@@ -23,6 +24,22 @@ output_lock = threading.Lock()
 
 def handler(signum, frame):
     exit_event.set()
+
+
+def process_message(message):
+    data = json.load(message)
+    content = data["content"]
+
+    if content == "headup":
+        print("tilt up pressed!")
+    elif content == "headdown":
+        print("tilt down pressed!")
+    elif content == "headleft":
+        print("pan left pressed!")
+    elif content == "headright":
+        print("pan right pressed!")
+
+
 
 signal.signal(signal.SIGINT, handler)
 
@@ -74,6 +91,8 @@ def start_client():
             output_split = output.split("\r\n")
             for i in range(len(output_split) - 1):
                 print(output_split[i])
+
+            process_message(output_split)
             output = output_split[-1]
             output_lock.release()
     server_sock.close()

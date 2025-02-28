@@ -3,6 +3,12 @@ import threading
 from collections import deque
 import signal
 import time
+import json
+import os
+import portalocker
+
+MESSAGE_FILE = "message.json"
+RESPONSE_FILE = "response.json"
 
 server_addr = 'D8:3A:DD:6D:E5:D4'
 server_port = 1
@@ -76,6 +82,16 @@ def start_client():
     print("client thread end")
 
 
+"""
+            with open(RESPONSE_FILE, "w") as file:
+                portalocker.lock(file, portalocker.LOCK_EX)
+                json.dump({"reply": output_split}, file)
+                portalocker.unlock(file)
+            print("Python created response.json")
+"""            
+            
+
+
 cth = threading.Thread(target=start_client)
 
 cth.start()
@@ -85,7 +101,20 @@ print("finish join")
 j = 0
 while not exit_event.is_set():
     dq_lock.acquire()
-    message_queue.append("PC " + str(j) + " \r\n")
+
+    message_queue.append("PC " + str(j) + " \r\n")                 
+
+    if os.path.exists(MESSAGE_FILE) and os.path.getsize(MESSAGE_FILE) > 0:
+        with open(MESSAGE_FILE, "r+") as file:
+            try:
+                portalocker.lock(file, portalocker.LOCK_EX)
+                data = json.load(file)
+                message_queue.append(json.dumps(data) + " \r\n")
+                file.truncate(0)
+                portalocker.unlock(file)
+            except json.decoder.JSONDecodeError:
+                print("JSONDecodeError: File Empty or Damaged")
+
     dq_lock.release()
     j += 1
     time.sleep(2)
