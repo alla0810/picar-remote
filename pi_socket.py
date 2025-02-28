@@ -27,17 +27,22 @@ def handler(signum, frame):
 
 
 def process_message(message):
-    data = json.loads(message)
-    content = data["content"]
+    try:
+        data = json.loads(message)
+        content = data.get("content", "").lower()
 
-    if content == "headup":
-        print("tilt up pressed!")
-    elif content == "headdown":
-        print("tilt down pressed!")
-    elif content == "headleft":
-        print("pan left pressed!")
-    elif content == "headright":
-        print("pan right pressed!")
+        if content == "headup":
+            print("tilt up pressed!")
+        elif content == "headdown":
+            print("tilt down pressed!")
+        elif content == "headleft":
+            print("pan left pressed!")
+        elif content == "headright":
+            print("pan right pressed!")
+        else:
+            print("Unknown command:", content)
+    except json.JSONDecodeError:
+        print("JSON Format Error:", message)
 
 
 
@@ -91,8 +96,12 @@ def start_client():
             output_split = output.split("\r\n")
             for i in range(len(output_split) - 1):
                 print(output_split[i])
+                try:
+                    process_message(output_split[i])
+                except json.JSONDecodeError:
+                    print("JSON Parsing Error:", output_split[i])
 
-            process_message(output_split)
+
             output = output_split[-1]
             output_lock.release()
     server_sock.close()
