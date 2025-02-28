@@ -10,8 +10,6 @@ server_addr = 'D8:3A:DD:6D:E5:D4'
 server_port = 1
 
 px = Picarx()
-pan_angle = 0
-tilt_angle = 0
 
 buf_size = 1024
 
@@ -32,6 +30,8 @@ def handler(signum, frame):
 
 
 def process_message(message):
+    global pan_angle,tilt_angle    
+
     try:
         data = json.loads(message)
         content = data.get("content", "").lower()
