@@ -1,6 +1,9 @@
 # picar-remote
 
 ## Frontend
+pip install flask
+python bt_flask_server.py
+
 npm install express
 npm install electron  
 npm init -y  

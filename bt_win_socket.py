@@ -27,23 +27,20 @@ def handler(signum, frame):
 signal.signal(signal.SIGINT, handler)
 
 def start_client():
-    global server_addr
-    global server_port
-    global server_sock
     global sock
+    global dq_lock
+    global output_lock
     global exit_event
     global message_queue
     global output
-    global dq_lock
-    global output_lock
-    server_sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-    server_sock.bind((server_addr, server_port))
-    server_sock.listen(1)
-    server_sock.settimeout(60)
-    sock, address = server_sock.accept()
-    print("Connected")
-    server_sock.settimeout(None)
-    sock.setblocking(0)
+    global server_addr
+    global server_port
+    sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+    sock.settimeout(60)
+    sock.connect((server_addr,server_port))
+    sock.settimeout(None)
+    print("after connect")
+    sock.setblocking(False)
     while not exit_event.is_set():
         if dq_lock.acquire(blocking=False):
             if(len(message_queue) > 0):
@@ -62,11 +59,10 @@ def start_client():
             data = ""
             try:
                 try:
-                    data = sock.recv(1024).decode('utf-8')
+                    data = sock.recv(1024).decode("utf-8")
                 except socket.error as e:
                     assert(1==1)
                     #no data
-
             except Exception as e:
                 exit_event.set()
                 continue
@@ -76,7 +72,6 @@ def start_client():
                 print(output_split[i])
             output = output_split[-1]
             output_lock.release()
-    server_sock.close()
     sock.close()
     print("client thread end")
 
@@ -85,16 +80,18 @@ cth = threading.Thread(target=start_client)
 
 cth.start()
 
+
+print("finish join")
 j = 0
 while not exit_event.is_set():
     dq_lock.acquire()
-    message_queue.append("RPi " + str(j) + " \r\n")
+    message_queue.append("PC " + str(j) + " \r\n")
     dq_lock.release()
     j += 1
-    time.sleep(1.5)
-    
+    time.sleep(2)
 
 print("Disconnected.")
+
 
 
 print("All done.")

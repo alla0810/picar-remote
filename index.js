@@ -1,6 +1,8 @@
 var server_port = 65432;
 var server_addr = "192.168.1.86";   // the IP address of your Raspberry PI
 
+var WIFI_BT_MODE = "WIFI";   // Default = WIFI
+
 function client(input){
     
     const net = require('net');
@@ -42,28 +44,62 @@ function update_data(){
 }
 
 function HeadupArrow(){
-    console.log("HeadUp");
+    if (WIFI_BT_MODE == "BT")
+    {
+        console.log("[BT] HeadUp");        
+        sendCommand("HeadUp");
+    }
+    else
+    {    
+        console.log("[WIFI] HeadUp");
 
-    client("HeadUp");
+        client("HeadUp");
+    }
 
 }
 
 function HeadleftArrow(){
-    console.log("HeadLeft");
+    if (WIFI_BT_MODE == "BT")
+    {
+        console.log("[BT] HeadLeft");        
+        sendCommand("HeadLeft");
+    }
+    else
+    {    
+        console.log("[WIFI] HeadLeft");
 
-    client("HeadLeft");
+        client("HeadLeft");
+    }
 }
 
 function HeadrightArrow(){
-    console.log("HeadRight");
+
+    if (WIFI_BT_MODE == "BT")
+    {
+        console.log("[BT] HeadRight");        
+        sendCommand("HeadRight");
+    }
     
-    client("HeadRight");
+    else
+    {
+        console.log("[WIFI] HeadRight");
+    
+        client("HeadRight");
+    }
 }
 
 function HeaddownArrow(){
-    console.log("HeadDown");
+    if (WIFI_BT_MODE == "BT")
+    {
+        console.log("[BT] HeadDown");        
+        sendCommand("HeadDown");
+    }
+    else
+    {    
+        console.log("[WIFI] HeadDown");
 
-    client("HeadDown");
+        client("HeadDown");
+    }
 
 }
 
@@ -73,39 +109,91 @@ function wifi_bt_toggleSwitch(){
 
     if(toggle.checked){        
         label.textContent = "Bluetooth";
+        WIFI_BT_MODE = "BT"
         console.log("Bluetooth")
     }
     else {
         label.textContent = "WiFi";
+        WIFI_BT_MODE = "WIFI"
         console.log("WiFi")        
     }
 }
 
 
 function DriveupArrow(){
-    console.log("DriveUp");
 
-    client("DriveUp");
+    if (WIFI_BT_MODE == "BT")
+    {
+        console.log("[BT] DriveUp");        
+        sendCommand("DriveUp");
+    }
+    else
+    {
+        console.log("[WIFI] DriveUp");                
+        client("DriveUp");
+    }
 
 }
 
 function DriveleftArrow(){
-    console.log("DriveLeft");
-
-    client("DriveLeft");
+    if (WIFI_BT_MODE == "BT")
+    {
+        console.log("[BT] DriveLeft");        
+        sendCommand("DriveLeft");
+    }
+    else
+    {
+        console.log("[WIFI] DriveLeft");                        
+        client("DriveLeft");
+    }
 
 }
 
 function DriverightArrow(){
-    console.log("DriveRight");
-
-    client("DriveRight");
+    if (WIFI_BT_MODE == "BT")
+    {
+        console.log("[BT] DriveRight");        
+        sendCommand("DriveRight");
+    }
+    else
+    {
+        console.log("[WIFI] DriveRight");                                
+        client("DriveRight");
+    }
 
 }
 
 function DrivedownArrow(){
-    console.log("DriveDown");
+    if (WIFI_BT_MODE == "BT")
+    {    
+        console.log("[BT] DriveDown");        
+        sendCommand("DriveDown");
+    }
+    else
+    {
+        console.log("DriveDown");
 
-    client("DriveDown");
+        client("DriveDown");
+    }
 
+}
+
+function sendCommand(command) {
+    fetch("/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ "message": command })
+    })
+    .then(response => response.json())
+    .then(data => console.log("Response:", data))
+    .catch(error => console.error("Error:", error));
+}
+
+function fetchMessages() {
+    fetch("/receive")
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("messages").innerText = data.received;
+    })
+    .catch(error => console.error("Error:", error));
 }
