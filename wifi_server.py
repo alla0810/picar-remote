@@ -47,7 +47,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     if pan_angle > 60:
                         pan_angle = 60
 
-                if text == "driveup":
+                elif text == "driveup":
                     print("drive up pressed!")
                     px.set_dir_servo_angle(0)
                     px.forward(80)

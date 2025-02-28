@@ -4,9 +4,14 @@ from collections import deque
 import signal
 import time
 import json
+from picarx import Picarx
 
 server_addr = 'D8:3A:DD:6D:E5:D4'
 server_port = 1
+
+px = Picarx()
+pan_angle = 0
+tilt_angle = 0
 
 buf_size = 1024
 
@@ -33,14 +38,51 @@ def process_message(message):
 
         if content == "headup":
             print("tilt up pressed!")
+            tilt_angle += 5
+            if tilt_angle > 60:
+                tilt_angle = 60
         elif content == "headdown":
             print("tilt down pressed!")
-        elif content == "headleft":
+            tilt_angle -= 5
+            if tilt_angle < -60:
+                tilt_angle = -60
+        elif content == "headleft":            
             print("pan left pressed!")
+            pan_angle -= 5
+            if pan_angle < -60:
+                pan_angle = -60
         elif content == "headright":
             print("pan right pressed!")
+            pan_angle += 5
+            if pan_angle > 60:
+                pan_angle = 60
+        elif content == "driveup":
+            print("drive up!")
+            px.set_dir_servo_angle(0)
+            px.forward(80)
+        
+        elif content == "drivedown":
+            print("drive down")
+            px.set_dir_servo_angle(0)
+            px.backward(80)
+
+        elif content == "driveleft":
+            print("drive left")
+            px.set_dir_servo_angle(-30)
+            px.forward(80)
+
+        elif content == "driveright":
+            print("drive right")
+            px.set_dir_servo_angle(30)
+            px.forward(80)
         else:
             print("Unknown command:", content)
+
+        px.set_cam_tilt_angle(tilt_angle)
+        px.set_cam_pan_angle(pan_angle)
+        time.sleep(0.5)
+        px.forward(0)
+        
     except json.JSONDecodeError:
         print("JSON Format Error:", message)
 

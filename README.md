@@ -2,10 +2,11 @@
 
 ## Frontend
 pip install portalocker
-python bt_win_socket.py
-
 npm install express
 npm install electron  
+
+python bt_win_socket.py
+
 npm init -y  
 npm start  
 
@@ -13,3 +14,4 @@ npm start
 
 sudo python3 video_server.py  
 sudo python3 wifi_server.py  
+sudo python3 pi_bt_socket.py

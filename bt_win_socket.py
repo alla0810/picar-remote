@@ -102,7 +102,7 @@ j = 0
 while not exit_event.is_set():
     dq_lock.acquire()
 
-    message_queue.append("PC " + str(j) + " \r\n")                 
+#    message_queue.append("PC " + str(j) + " \r\n")                 
 
     if os.path.exists(MESSAGE_FILE) and os.path.getsize(MESSAGE_FILE) > 0:
         with open(MESSAGE_FILE, "r+") as file:
