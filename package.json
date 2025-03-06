@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^10.4.7"
+    "electron": "^35.0.0"
   },
   "description": "npm init -y\r npm install electron\r npm start\r npm clean\r npm start",
   "repository": {
@@ -102,5 +102,6 @@
     "util-deprecate": "^1.0.2",
     "wrappy": "^1.0.2",
     "yauzl": "^2.10.0"
-  }
+  },
+  "type": "commonjs"
 }
