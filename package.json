@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^35.0.0"
+    "electron": "^10.4.7"
   },
   "description": "npm init -y\r npm install electron\r npm start\r npm clean\r npm start",
   "repository": {

@@ -5,7 +5,7 @@ const MESSAGE_FILE = "message.json";
 const RESPONSE_FILE = "response.json";
 
 var server_port = 65432;
-var server_addr = "192.168.1.86";   // the IP address of your Raspberry PI
+var server_addr = process.argv[2] || "192.168.1.86"; // the IP address of your Raspberry PI
 
 var WIFI_BT_MODE = "WIFI";   // Default = WIFI
 

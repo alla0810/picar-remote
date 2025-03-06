@@ -6,7 +6,7 @@ const express = require("express")
 let mainWindow;
 const express_server = express();
 const PORT = 3000;
-const PC_IP = "192.168.1.77";
+const PC_IP = "192.168.1.239";
 
 console.log(`Express Server running at http://${PC_IP}:${PORT}`);
 

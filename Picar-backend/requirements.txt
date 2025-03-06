@@ -1,0 +1,5 @@
+netifaces
+bluedot
+flask
+opencv-python
+picamera2
