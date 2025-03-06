@@ -3,8 +3,15 @@ import threading
 from collections import deque
 import signal
 import time
+import argparse
 
-server_addr = 'D8:3A:DD:6D:E5:D4'
+parser = argparse.ArgumentParser(description="Picar Remote Control")
+parser.add_argument(
+    "--addr", type=str, default="D8:3A:DD:6D:E5:D4", help="Server address"
+)
+args = parser.parse_args()
+
+server_addr = args.addr
 server_port = 1
 
 buf_size = 1024
@@ -21,10 +28,13 @@ output = ""
 dq_lock = threading.Lock()
 output_lock = threading.Lock()
 
+
 def handler(signum, frame):
     exit_event.set()
 
+
 signal.signal(signal.SIGINT, handler)
+
 
 def start_client():
     global sock
@@ -37,15 +47,15 @@ def start_client():
     global server_port
     sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
     sock.settimeout(10)
-    sock.connect((server_addr,server_port))
+    sock.connect((server_addr, server_port))
     sock.settimeout(None)
     print("after connect")
     sock.setblocking(False)
     while not exit_event.is_set():
         if dq_lock.acquire(blocking=False):
-            if(len(message_queue) > 0):
+            if len(message_queue) > 0:
                 try:
-                    sent = sock.send(bytes(message_queue[0], 'utf-8'))
+                    sent = sock.send(bytes(message_queue[0], "utf-8"))
                 except Exception as e:
                     exit_event.set()
                     continue
@@ -54,15 +64,15 @@ def start_client():
                 else:
                     message_queue.popleft()
             dq_lock.release()
-        
+
         if output_lock.acquire(blocking=False):
             data = ""
             try:
                 try:
                     data = sock.recv(1024).decode("utf-8")
                 except socket.error as e:
-                    assert(1==1)
-                    #no data
+                    assert 1 == 1
+                    # no data
             except Exception as e:
                 exit_event.set()
                 continue
@@ -91,7 +101,6 @@ while not exit_event.is_set():
     time.sleep(2)
 
 print("Disconnected.")
-
 
 
 print("All done.")
