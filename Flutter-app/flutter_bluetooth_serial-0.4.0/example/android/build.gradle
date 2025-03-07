@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    afterEvaluate {
+        android {
+            compileSdkVersion 35
+        }
+    }
+
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+    afterEvaluate {
+        android {
+            compileSdkVersion 35
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
