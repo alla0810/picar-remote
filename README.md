@@ -22,7 +22,8 @@ npm install electron@35.0.0
 ```
 
 ### Bluetooth App
-Make sure your Android phone (Recommend Android 11 or below) is connected to the Pi, and build the Flutter app on it.
+Make sure your Android phone (Recommend Android 11 or below) is connected to the Pi, and build the Flutter app on it utilizing your PC with the proper environment.
+[General direction on how to build your flutter app](https://github.com/Saurabhdarekar/Flutter-app/blob/main/README.md)
 
 
 ## Usage over bluetooth app
