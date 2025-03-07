@@ -1,7 +1,7 @@
 const net = require('net');
 
 // Configuration - update with your Raspberry Pi's IP
-const PI_IP = '192.168.1.233';
+const PI_IP = process.argv[2] || '192.168.1.233';
 const PI_PORT = 65432;
 
 // Variables
