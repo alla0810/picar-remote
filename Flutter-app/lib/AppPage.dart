@@ -22,6 +22,7 @@ class _AppPage extends State<AppPage> {
 
   double leftJoystickX = 0, leftJoystickY = 0;
   double rightJoystickX = 0, rightJoystickY = 0;
+  String _receivedMessage = "No messages yet"; // Store received messages
 
   @override
   void initState() {
@@ -68,14 +69,21 @@ class _AppPage extends State<AppPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                "Received: $_receivedMessage",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Left Joystick Column
                 Column(
                   children: [
                     Text("Camera: X=${leftJoystickX.toStringAsFixed(2)}, Y=${leftJoystickY.toStringAsFixed(2)}"),
-                    SizedBox(height: 10), // Space between text and joystick
+                    SizedBox(height: 10),
                     Joystick(
                       mode: JoystickMode.all,
                       listener: (details) {
@@ -88,8 +96,7 @@ class _AppPage extends State<AppPage> {
                     ),
                   ],
                 ),
-                SizedBox(width: 50), // Space between the two joysticks
-                // Right Joystick Column
+                SizedBox(width: 50),
                 Column(
                   children: [
                     Text("Movement: X=${rightJoystickX.toStringAsFixed(2)}, Y=${rightJoystickY.toStringAsFixed(2)}"),
@@ -117,6 +124,10 @@ class _AppPage extends State<AppPage> {
   void _onDataReceived(Uint8List data) {
     String receivedData = utf8.decode(data);
     print("Received: $receivedData");
+
+    setState(() {
+      _receivedMessage = receivedData; // Update the displayed message
+    });
   }
 
   void _sendMessage(String text) async {
