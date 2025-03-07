@@ -40,6 +40,7 @@ python Picar-backend/wifi_server.py
 ```
 
 ### On Remote PC
+Change the PI_IP address to your raspberrypi's address in [index.js](/remote-frontend/index.js)
 ```
 npm start
 ```
