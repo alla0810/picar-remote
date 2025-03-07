@@ -1,5 +1,11 @@
 netifaces
 bluedot
 flask
+dbus-python
+gpiozero
+smbus2
+pyaudio
+lgpio
+RPi.GPIO
 opencv-python
 picamera2

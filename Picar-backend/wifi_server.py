@@ -477,4 +477,7 @@ def main():
 
 if __name__ == "__main__":
     print("Starting PiCar-X Combined Server...")
-    main()
+    try:
+        main()
+    finally:
+        camera.close()
